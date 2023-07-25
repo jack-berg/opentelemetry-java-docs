@@ -18,6 +18,7 @@ dependencies {
     //alpha modules
     implementation("io.opentelemetry.instrumentation:opentelemetry-micrometer-1.5")
     implementation("io.opentelemetry:opentelemetry-exporter-prometheus")
+    implementation("io.opentelemetry:opentelemetry-exporter-otlp")
 
     //spring modules
     implementation("org.springframework.boot:spring-boot-starter-web")
