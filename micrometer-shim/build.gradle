@@ -1,11 +1,16 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.7.14'
+    id 'org.springframework.boot' version '3.1.1'
     id 'io.spring.dependency-management' version '1.1.2'
 }
 
 description = 'OpenTelemetry Example for Micrometer Shim'
 ext.moduleName = "io.opentelemetry.examples.micrometer-shim"
+
+compileJava {
+    sourceCompatibility = "17"
+    targetCompatibility = "17"
+}
 
 bootRun {
     mainClass.set 'io.opentelemetry.example.micrometer.Application'
@@ -23,4 +28,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-aop")
+    implementation("io.micrometer:micrometer-registry-otlp")
+
 }
