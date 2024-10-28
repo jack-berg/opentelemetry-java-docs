@@ -3,17 +3,27 @@ receivers:
     protocols:
       http:
         endpoint: "0.0.0.0:4318"
+processors:
+  batch:
 exporters:
   debug:
     verbosity: detailed
+  otlphttp:
+    endpoint: https://otlp.nr-data.net:4318
+    headers:
+      api-key: ${NEW_RELIC_API_KEY}
+
 service:
   pipelines:
     metrics:
       receivers: [otlp]
-      exporters: [debug]
+      processors: [batch]
+      exporters: [debug, otlphttp]
     traces:
       receivers: [otlp]
-      exporters: [debug]
+      processors: [batch]
+      exporters: [debug, otlphttp]
     logs:
       receivers: [otlp]
-      exporters: [debug]
+      processors: [batch]
+      exporters: [debug, otlphttp]

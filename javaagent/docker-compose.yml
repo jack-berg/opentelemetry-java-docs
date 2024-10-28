@@ -1,29 +1,30 @@
 version: '3'
 services:
+
   app:
     build: ./
     environment:
-      OTEL_SERVICE_NAME: "agent-example-app"
-      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: "http://collector:4318/v1/traces"
-      OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: "http://collector:4318/v1/metrics"
-      OTEL_EXPORTER_OTLP_LOGS_ENDPOINT: "http://collector:4318/v1/logs"
-      # Logs are disabled by default
-      OTEL_LOGS_EXPORTER: "otlp"
-      # Optional specify file configuration instead of using environment variable scheme
-      # To use, call "export OTEL_EXPERIMENTAL_CONFIG_FILE=/sdk-config.yaml" before calling docker compose up
-      OTEL_EXPERIMENTAL_CONFIG_FILE:
+      OTEL_EXPERIMENTAL_CONFIG_FILE: /sdk-config.yaml
+      NEW_RELIC_API_KEY: ${NEW_RELIC_API_KEY}
     ports:
       - "8080:8080"
+      - "9464:9464"
     volumes:
       - ./sdk-config.yaml:/sdk-config.yaml
     depends_on:
-      - collector
-  collector:
-    image: otel/opentelemetry-collector-contrib:0.111.0
+      - jaeger
+
+  prometheus:
+    image: prom/prometheus
     volumes:
-      - ./collector-config.yaml:/collector-config.yaml
-    command: ["--config=/collector-config.yaml"]
-    expose:
-      - "4318"
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - app
     ports:
-      - "4318:4318"
+      - '9090:9090'
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.62.0
+    ports:
+      - '16686:16686'
+      - '4317:4317'

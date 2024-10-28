@@ -61,3 +61,33 @@ export OTEL_EXPERIMENTAL_CONFIG_FILE=/sdk-config.yaml
 ```
 
 Note: toggling declarative configuration causes the env var configuration scheme to be ignored completely. However, there is support for [env var substitution](https://opentelemetry.io/docs/specs/otel/configuration/data-model/#environment-variable-substitution) within configuration files.
+
+## Demo notes
+
+Jaeger UI: http://localhost:16686
+
+Prometheus UI: http://localhost:9090
+
+Metric requests by route:
+
+```
+SELECT count(http.server.request.duration) FROM Metric WHERE service.name = 'agent-declarative-config' FACET http.route
+```
+
+Span requests by route:
+
+```
+SELECT count(*) FROM Span WHERE service.name = 'agent-declarative-config' FACET http.route
+```
+
+Unique metric names:
+
+```
+SELECT uniques(metricName) FROM Metric WHERE service.name = 'agent-declarative-config' limit max
+```
+
+Span keyset:
+
+```
+SELECT keyset() FROM Span WHERE service.name = 'agent-declarative-config' limit max
+```
