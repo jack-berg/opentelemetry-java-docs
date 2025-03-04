@@ -12,6 +12,8 @@ services:
       # Optional specify file configuration instead of using environment variable scheme
       # To use, call "export OTEL_EXPERIMENTAL_CONFIG_FILE=/sdk-config.yaml" before calling docker compose up
       OTEL_EXPERIMENTAL_CONFIG_FILE:
+      OTEL_JAVAAGENT_DEBUG: true
+    entrypoint: "java -javaagent:/opentelemetry-javaagent.jar -Dio.opentelemetry.exporter.internal.http.HttpSenderProvider=io.opentelemetry.exporter.sender.jdk.internal.JdkHttpSenderprovider -Dotel.javaagent.extensions=/opentelemetry-javaagent-extension.jar -jar /app.jar"
     ports:
       - "8080:8080"
     volumes:
