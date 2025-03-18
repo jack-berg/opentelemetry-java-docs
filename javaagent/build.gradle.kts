@@ -21,6 +21,7 @@ val extension = configurations.create("extension")
 dependencies {
     implementation(platform(SpringBootPlugin.BOM_COORDINATES))
     implementation("io.opentelemetry:opentelemetry-api")
+    implementation("io.opentelemetry:opentelemetry-sdk-common")
 
     //spring modules
     implementation("org.springframework.boot:spring-boot-starter-web")
