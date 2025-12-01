@@ -22,10 +22,19 @@ dependencies {
     // JUL to SLF4J bridge
     implementation("org.slf4j:jul-to-slf4j:2.0.17")
 
-    // Log4j
+    // Log4j2
     implementation(platform("org.apache.logging.log4j:log4j-bom:2.25.2"))
     implementation("org.apache.logging.log4j:log4j-api")
     implementation("org.apache.logging.log4j:log4j-core")
+    implementation("org.apache.logging.log4j:log4j-slf4j2-impl")
+
+    // Log4j1
+    //implementation("log4j:log4j:1.2.17")
+
+    // Reload4j
+    implementation("ch.qos.reload4j:reload4j:1.2.26")
+
+    implementation("org.apache.logging.log4j:log4j-to-slf4j:2.25.2")
 
     // OpenTelemetry core
     implementation("io.opentelemetry:opentelemetry-sdk")

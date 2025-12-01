@@ -31,6 +31,8 @@ public class Application {
       LogManager.getLogger("log4j-logger");
   private static final org.slf4j.Logger slf4jLogger = LoggerFactory.getLogger("slf4j-logger");
   private static final java.util.logging.Logger julLogger = Logger.getLogger("jul-logger");
+  private static final org.apache.log4j.Logger log4j1Logger = org.apache.log4j.Logger.getLogger("log4j1-logger");
+
 
   public static void main(String[] args) {
     // Initialize OpenTelemetry as early as possible
@@ -162,12 +164,12 @@ public class Application {
   private static class Slf4jLogProcessor implements LogRecordProcessor {
       @Override
       public void onEmit(Context context, ReadWriteLogRecord readWriteLogRecord) {
-          org.slf4j.Logger logger = LoggerFactory.getLogger(readWriteLogRecord.getInstrumentationScopeInfo().getName());
-
-          Level level = severityToLevel(readWriteLogRecord.getSeverity());
-
-          logger.atLevel(level)
-                  .log(readWriteLogRecord.getBodyValue().asString());
+//          org.slf4j.Logger logger = LoggerFactory.getLogger(readWriteLogRecord.getInstrumentationScopeInfo().getName());
+//
+//          Level level = severityToLevel(readWriteLogRecord.getSeverity());
+//
+//          logger.atLevel(level)
+//                  .log(readWriteLogRecord.getBodyValue().asString());
       }
 
       private static final Level severityToLevel(Severity severity) {
