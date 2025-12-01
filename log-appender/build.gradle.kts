@@ -34,7 +34,11 @@ dependencies {
 
     // OpenTelemetry log4j / logback appenders
     implementation("io.opentelemetry.instrumentation:opentelemetry-log4j-appender-2.17")
-    implementation("io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0")
+    // implementation("io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0")
+
+    compileOnly("ch.qos.logback:logback-classic:1.3.16")
+    compileOnly("org.slf4j:slf4j-api:2.0.17")
+    compileOnly("net.logstash.logback:logstash-logback-encoder:3.0")
 }
 
 application {

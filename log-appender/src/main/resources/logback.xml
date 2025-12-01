@@ -8,7 +8,7 @@
         </encoder>
     </appender>
     <appender name="OpenTelemetry"
-              class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender">
+              class="v1_0.OpenTelemetryAppender">
         <captureExperimentalAttributes>true</captureExperimentalAttributes>
         <captureKeyValuePairAttributes>true</captureKeyValuePairAttributes>
     </appender>
